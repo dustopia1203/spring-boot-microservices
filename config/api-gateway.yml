@@ -1,0 +1,21 @@
+spring:  
+  cloud:
+    gateway:
+      mvc:
+        routes:
+          - id: video-catalog-service
+            uri: http://localhost:8090
+            predicates:
+              - Path=/api/v1/video-info/**
+          - id: video-streaming-service
+            uri: http://localhost:8091
+            predicates:
+              - Path=/api/v1/stream/**
+
+server:
+  port: 8080
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka
